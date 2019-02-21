@@ -9,7 +9,7 @@ using Booper.Services;
 using System.Configuration;
 
 namespace Booper
-    // Version 1
+    // Version 0.1
 {
     class Program
     {
