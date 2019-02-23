@@ -19,14 +19,8 @@ namespace Booper.Modules.Owner
     [MinPermissions(AccessLevel.BotOwner)]
     public class OwnerModule : ModuleBase<SocketCommandContext>
     {
-        private static MemoryStream GenerateStreamFromString(string value)
-        {
-            return new MemoryStream(Encoding.Unicode.GetBytes(value ?? ""));
-        }
-
         Random rnd = new Random();
         int rndResult;
-
 
         [Command("Stop")]
         [Alias("Quit")]
@@ -117,6 +111,11 @@ namespace Booper.Modules.Owner
             var glds = (Context.Client as DiscordSocketClient).Guilds;
             var defaultchan = glds.Select(g => g.GetChannel(g.Id)).Cast<ITextChannel>();
             await Task.WhenAll(defaultchan.Select(c => c.SendMessageAsync(msg)));
+        }
+
+        private static MemoryStream GenerateStreamFromString(string value)
+        {
+            return new MemoryStream(Encoding.Unicode.GetBytes(value ?? ""));
         }
     }
 }

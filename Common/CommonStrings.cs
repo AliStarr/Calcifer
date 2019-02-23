@@ -1,21 +1,13 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-
+﻿
 namespace Booper.Common
 {
     public class CommonStrings
     {
         // Bot strings
-        public static string BotVersion()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;
 
-            return version;
-        }
-
-        // Major.Minor.{RevisionLetter}-Release
+        // Major.Minor.Patch Release
+        private static string botVersion = "1.0.2";
+        public static string BotVersion { get => botVersion; }
 
 
         public static string gitRepo = "";
@@ -40,5 +32,7 @@ namespace Booper.Common
         {
             "Later, nerds", "Bye!", "Seeya!", "Adios", "Good Bye! :wave:", ":sleeping: Good night", "Night night :zzz:", "IM OUT! :v:"
         };
+
+        
     }
 }

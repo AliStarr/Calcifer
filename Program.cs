@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Booper.Common;
+using Booper.Services;
+using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Discord;
-using Discord.WebSocket;
-using Discord.Commands;
-using Booper.Services;
-using System.Configuration;
 
 namespace Booper
-    // Version 0.1
 {
     class Program
     {
@@ -18,6 +18,8 @@ namespace Booper
 
         public async Task MainAsync()
         {
+            Console.Title = $"Booper version {CommonStrings.BotVersion}";
+
             string discordToken = ConfigurationManager.AppSettings["discord"];
             using (var services = ConfigureServices())
             {

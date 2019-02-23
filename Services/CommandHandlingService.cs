@@ -24,10 +24,8 @@ namespace Booper.Services
             _discord.MessageReceived += MessageReceivedAsync;
         }
 
-        public async Task InitializeAsync()
-        {
-            await _commands.AddModulesAsync(Assembly.GetExecutingAssembly(), _services);
-        }
+        public async Task InitializeAsync() 
+            => await _commands.AddModulesAsync(Assembly.GetExecutingAssembly(), _services);
 
         public async Task MessageReceivedAsync(SocketMessage rawMessage)
         {
