@@ -24,7 +24,7 @@ namespace Booper
             using (var services = ConfigureServices())
             {
                 var client = services.GetRequiredService<DiscordSocketClient>();
-
+                
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
@@ -44,14 +44,11 @@ namespace Booper
             return Task.CompletedTask;
         }
 
-        private ServiceProvider ConfigureServices()
-        {
-            return new ServiceCollection()
+        private ServiceProvider ConfigureServices() => new ServiceCollection()
                 .AddSingleton<DiscordSocketClient>()
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
                 .AddSingleton<HttpClient>()
                 .BuildServiceProvider();
-        }
     }
 }

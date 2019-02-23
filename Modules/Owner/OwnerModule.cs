@@ -113,9 +113,7 @@ namespace Booper.Modules.Owner
             await Task.WhenAll(defaultchan.Select(c => c.SendMessageAsync(msg)));
         }
 
-        private static MemoryStream GenerateStreamFromString(string value)
-        {
-            return new MemoryStream(Encoding.Unicode.GetBytes(value ?? ""));
-        }
+        private static MemoryStream GenerateStreamFromString(string value) 
+            => new MemoryStream(Encoding.Unicode.GetBytes(value ?? ""));
     }
 }
