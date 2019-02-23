@@ -18,7 +18,7 @@ namespace Booper
 
         public async Task MainAsync()
         {
-            string token = ConfigurationManager.AppSettings["discord"];
+            string discordToken = ConfigurationManager.AppSettings["discord"];
             using (var services = ConfigureServices())
             {
                 var client = services.GetRequiredService<DiscordSocketClient>();
@@ -26,7 +26,7 @@ namespace Booper
                 client.Log += LogAsync;
                 services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                await client.LoginAsync(TokenType.Bot, token);
+                await client.LoginAsync(TokenType.Bot, discordToken);
                 await client.StartAsync();
 
                 await services.GetRequiredService<CommandHandlingService>().InitializeAsync();

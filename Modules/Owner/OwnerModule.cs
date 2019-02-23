@@ -11,7 +11,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Windows.Forms;
+
+
 
 namespace Booper.Modules.Owner
 {
@@ -38,7 +39,7 @@ namespace Booper.Modules.Owner
             await ReplyAsync(CommonStrings.quitStrings[rndResult]);
             Environment.Exit(0x0);
         }
-        /*
+        
         [Command("Restart")]
         [Alias("Reboot")]
         [Summary("Restarts the Bot - _Owner Only_")]
@@ -49,14 +50,11 @@ namespace Booper.Modules.Owner
         {
             rndResult = rnd.Next(1, CommonStrings.restartStrings.Length);
             await ReplyAsync(CommonStrings.restartStrings[rndResult]);
-            Process.Start(Application.ExecutablePath);
+            Process.Start("\\Blooper.exe");
             Environment.Exit(0x0);
 
         }
-        */
-
-
-
+        
 
         [Command("ServerList")]
         [Summary("Gets all the servers the bot is connected to.")]
