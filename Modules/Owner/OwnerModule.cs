@@ -31,7 +31,7 @@ namespace Booper.Modules.Owner
         {
             rndResult = rnd.Next(1, CommonStrings.quitStrings.Length);
             await ReplyAsync(CommonStrings.quitStrings[rndResult]);
-            Environment.Exit(0x0);
+            Environment.Exit(1);
         }
         
         [Command("Restart")]
@@ -44,8 +44,7 @@ namespace Booper.Modules.Owner
         {
             rndResult = rnd.Next(1, CommonStrings.restartStrings.Length);
             await ReplyAsync(CommonStrings.restartStrings[rndResult]);
-            Process.Start("\\Blooper.exe");
-            Environment.Exit(0x0);
+            Environment.Exit(0);
 
         }
         
