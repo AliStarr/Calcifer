@@ -31,7 +31,7 @@ namespace Booper.Services
         {
             // Ignore non-user messages 
             if (!(rawMessage is SocketUserMessage message)) return;
-            if (message.Source != MessageSource.User) return;
+            if (message.Source != MessageSource.User) return; // Bot can't me made to run commands from its self
 
             var argPos = 0;
             if (!(message.HasMentionPrefix(_discord.CurrentUser, ref argPos) || message.HasStringPrefix("~", ref argPos))) return;
@@ -51,8 +51,8 @@ namespace Booper.Services
             if (result.IsSuccess)
                 return;
 
-            // the command failed.  Let's notify the uiser that something went wrong
-            _ = await context.Channel.SendMessageAsync($"Error: {result.ToString()}");
+            // the command failed.  Let's notify the user that something went wrong
+            _ = await context.Channel.SendMessageAsync($":x: Error: {result.ToString()} \n please use the ~reportbug command to notify Alister if this keeps happening!");
         }
     }
 }

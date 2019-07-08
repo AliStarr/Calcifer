@@ -15,6 +15,7 @@ namespace Booper.Modules
 {
     public class PublicModule : ModuleBase
     {
+
         [MinPermissions(AccessLevel.BotOwner)]
         [Command("Invite")]
         [Summary("Creates an Oauth2 invite for the bot.")]
@@ -36,11 +37,11 @@ namespace Booper.Modules
             if (input.StartsWith("~"))
             {
                 await ReplyAsync("Nice try.");
-                return; // Prevents the bot from being issued commands from this command creating a clusterfuck.
+                return; // Prevents the bot from being issued commands from this command creating a clusterfuck. Although this is handled by the commandhandler
             }
             else
             {
-                await ReplyAsync('\u200B' + input);
+                await ReplyAsync('\u200B' + input); // ZWS avoid triggering other bots.
             }
         }
 
@@ -122,7 +123,7 @@ namespace Booper.Modules
         }
 
         [Command("GuildInfo")]
-        [Alias("gi")]
+        [Alias("gi", "ServerInfo")]
         [Summary("Displays information about a guild")]
         [Remarks("~GuildInfo")]
         public async Task GuildInfoAsync()
@@ -155,16 +156,27 @@ namespace Booper.Modules
             embed.Title = $"Calcifer  info and stats";
             embed.Description =
                 $"**Author: **{application.Owner.Mention} ID ({application.Owner.Id})\n" +
-                $"**Github Repo: **{CommonStrings.gitRepo}\n" +
+                // $"**Github Repo: **{CommonStrings.gitRepo}\n" +
                 $"**Discord .Net Libary version: **{DiscordConfig.Version}\n" +
                 $"**Bot Version and Release: **{CommonStrings.BotVersion}\n" +
                 $"**Runtime: **{RuntimeInformation.FrameworkDescription}\n" +
-                $"**Uptime (D.H.M.S): **{GetUpTime()}\n\n" +
+                $"**Uptime (D.H:M:S): **{GetUpTime()}\n\n" +
                 $"**Heap Size: **{GetHeapSize()}MB\n" +
                 $"**Guilds: **{(Context.Client as DiscordSocketClient).Guilds.Count}\n" +
                 $"**Channels: **{(Context.Client as DiscordSocketClient).Guilds.Sum(g => g.Channels.Count)}\n" +
                 $"**Users: **{(Context.Client as DiscordSocketClient).Guilds.Sum(g => g.Users.Count)}\n";
             await ReplyAsync("", false, embed.Build());
+        }
+
+        [Command("reportbug"), Alias("rb")]
+        [Summary("Pings Alister so he can fix issues with the bot.")]
+        [Remarks("~reportbug OR ~rb")]
+        public async Task ReportBugAsync()
+        {
+            await ReplyAsync("Pinging Alister to tell him that he sucks at programming...");
+            var msg = $"{Context.Message.Author.Mention} submitted a bug report! Guild: {Context.Guild.Name} Channel: {Context.Channel.Name}.";
+            var dmChannel = await Context.Guild.GetOwnerAsync();
+            await dmChannel.SendMessageAsync(msg);
         }
 
         private static string GetUpTime()

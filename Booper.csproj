@@ -8,16 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.0.1" />
-    <PackageReference Include="Discord.Net.Commands" Version="2.0.1" />
-    <PackageReference Include="Discord.Net.Core" Version="2.0.1" />
-    <PackageReference Include="Discord.Net.WebSocket" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Discord.Net" Version="2.1.1" />
+    <PackageReference Include="Discord.Net.Commands" Version="2.1.1" />
+    <PackageReference Include="Discord.Net.Core" Version="2.1.1" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Launch.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

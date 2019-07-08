@@ -6,7 +6,7 @@ namespace Booper.Common
         // Bot strings
 
         // Major.Minor.Patch Release
-        private static readonly string botVersion = "1.0.2";
+        private static readonly string botVersion = "1.0.4";
         public static string BotVersion { get => botVersion; }
 
 
