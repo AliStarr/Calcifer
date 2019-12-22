@@ -29,8 +29,9 @@ namespace Booper
 
             await client.LoginAsync(TokenType.Bot, discordToken);
             await client.StartAsync();
-
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
+
+            await client.SetGameAsync($"Version: {CommonStrings.BotVersion}");
 
             await Task.Delay(-1);
         }

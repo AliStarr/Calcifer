@@ -1,12 +1,12 @@
 ﻿
 namespace Booper.Common
 {
-    public class CommonStrings
+    public static class CommonStrings
     {
         // Bot strings
 
         // Major.Minor.Patch Release
-        private static readonly string botVersion = "1.0.5";
+        private const string botVersion = "1.0.5";
         public static string BotVersion { get => botVersion; }
 
 
