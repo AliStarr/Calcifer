@@ -13,7 +13,7 @@ namespace Booper
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         public async Task MainAsync()
@@ -21,20 +21,18 @@ namespace Booper
             Console.Title = $"Booper version {CommonStrings.BotVersion}";
 
             string discordToken = ConfigurationManager.AppSettings["discord"];
-            using (var services = ConfigureServices())
-            {
-                var client = services.GetRequiredService<DiscordSocketClient>();
-                
-                client.Log += LogAsync;
-                services.GetRequiredService<CommandService>().Log += LogAsync;
+            using var services = ConfigureServices();
+            var client = services.GetRequiredService<DiscordSocketClient>();
 
-                await client.LoginAsync(TokenType.Bot, discordToken);
-                await client.StartAsync();
+            client.Log += LogAsync;
+            services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
+            await client.LoginAsync(TokenType.Bot, discordToken);
+            await client.StartAsync();
 
-                await Task.Delay(-1);
-            }
+            await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
+
+            await Task.Delay(-1);
         }
 
         private Task LogAsync(LogMessage log)
