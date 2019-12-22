@@ -335,3 +335,4 @@ ASALocalRun/
 
 #token file
 App.config
+*.snippet

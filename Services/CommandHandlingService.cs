@@ -41,18 +41,60 @@ namespace Booper.Services
             await _commands.ExecuteAsync(context, argPos, _services); // handle result in CommandExecutedAsync
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "IDC")]
         public async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)
         {
             // command is unspecified when there was a search failure (command not found) we dont care about these errors
             if (!command.IsSpecified)
                 return;
 
-            // the command was successful, we dont care about this resuilt unless we want to log that a command secceeded
+            // the command was successful, we dont care about this result unless we want to log that a command secceeded
             if (result.IsSuccess)
                 return;
 
-            // the command failed.  Let's notify the user that something went wrong
-            _ = await context.Channel.SendMessageAsync($":x: Error: {result.ToString()} \n please use the ~reportbug command to notify Alister if this keeps happening!");
+            if (!result.IsSuccess)
+            {
+                if (result.Error == CommandError.ParseFailed)
+                {
+                    _ = await context.Channel.SendMessageAsync($":x: Error: {result.ErrorReason} This means that you tried to enter something that the bot didnt understand.\n" +
+                        $"The command **{command.Value.Name}** is used like this: _{command.Value.Remarks}_\n" +
+                        $"Please use the **~reportbug** command to notify Alister if this keeps happening!");
+                }
+
+                if (result.Error == CommandError.BadArgCount)
+                {
+                    await context.Channel.SendMessageAsync($":x: Error: {result.ErrorReason} This means that you didnt supply enough arguments to make the command work.\n" +
+                        $"The command **{command.Value.Name}** is used like this: _{command.Value.Remarks}_\n" +
+                        $"Please use the **~reportbug** command to notify Alister if this keeps happening!");
+                }
+
+                if (result.Error == CommandError.UnmetPrecondition)
+                {
+                    await context.Channel.SendMessageAsync($":x: Error: {result.ErrorReason} This means you don't have permission to run this command.\n" +
+                        $"Please use the **~reportbug** command to notify Alister if you should have permission!");
+                }
+                if (result.Error == CommandError.Exception)
+                {
+                    await context.Channel.SendMessageAsync($":x: Error: {result.ToString()}\n" +
+                        $"Oh shit something broke\n" +
+                        $"please use the ~reportbug command to notify Alister!");
+                }
+
+                if (result.Error == CommandError.UnknownCommand)
+                {
+                    return; // Don't do anything. We dont care if you tried to get a command that doesn't exist. Prevents spam.
+                }
+
+                else
+                {
+                    // something happened that wasnt covered
+                    await context.Channel.SendMessageAsync($":x: Error: {result.ToString()} \n please use the ~reportbug command to notify Alister if this keeps happening!");
+                }
+
+               
+            }
+            
+
         }
     }
 }
