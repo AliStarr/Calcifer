@@ -1,8 +1,7 @@
 ﻿using Discord.Commands;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Booper.Modules
 {
@@ -41,11 +40,11 @@ namespace Booper.Modules
             }
             catch (Exception ex)
             {
-                await ReplyAsync($"Exception thrown!!!\n{ex.Message}\nEND OF EXCEPTION MESSAGE");
+                await ReplyAsync($"Exception thrown!!!\n{ex.Message}\nEND OF EXCEPTION MESSAGE\n" +
+                    $"Message ALister with **~bugreport**");
                 throw;
             }
             
         }
-
     }
 }

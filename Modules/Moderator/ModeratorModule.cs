@@ -101,6 +101,7 @@ namespace Booper.Modules.Moderator
             {
                 (properties).Topic = input;
             });
+            await ReplyAsync(":ok_hand:");
         }
     }
 }
