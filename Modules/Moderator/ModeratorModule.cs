@@ -4,7 +4,7 @@ using Booper.Preconditions;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-
+using System;
 using System.Threading.Tasks;
 
 namespace Booper.Modules.Moderator
@@ -56,39 +56,33 @@ namespace Booper.Modules.Moderator
             await ReplyAsync($"{Context.User.Mention} unbanned {user.Mention}.");
         }
 
-        /*
+        
         [Command("Purge")]
         [Summary("Deletes the specified amout of messages from the channel. (Limit 100)")]
         [Remarks("~Purge <amount>")]
         [Priority(20)]
-        public async Task DeleteMessagesAsync(int amount)
+        public async Task DeleteMessagesAsync([Remainder]int amount = 1)
         {
-            var toDelete = Context.Channel.GetMessagesAsync(amount + 1).Flatten();
-            // currently I do not want to check if the messages are over 14 days old
-            //var inAge = toDelete.Where(x => (x.CreatedAt - DateTime.Now).TotalDays < 15).Take(amount);
-            var channel = (ITextChannel)Context.Channel;
-
+            var toDelete = await Context.Channel.GetMessagesAsync(amount).FlattenAsync();
             try
             {
                 if (amount <= 100)
                 {
-                    channel.DeleteMessagesAsync(toDelete);
-                    await ReplyAsync($"Removed {amount} message(s) from this channel :wastebasket:\nThis message will be remmoved in 10 seconds.");
-                    await Task.Delay(10000); // Wait 10 seconds
-                    var orig = Context.Channel.GetMessagesAsync(1).Flatten();
-                    await channel.DeleteMessagesAsync(orig); // Remove the generated message
+                    await (Context.Channel as ITextChannel).DeleteMessagesAsync(toDelete);
+                    var m = await ReplyAsync($"Removed **{amount}** message(s) from this channel.\nThis message will be removed in 5 seconds."); // Pop a message and store its ID so we can target it for removal.
+                    await Task.Delay(5000); // Wait 5 seconds
+                    await (Context.Channel as ITextChannel).DeleteMessageAsync(m); // Remove the generated message.
                 }
                 else if (amount > 100)
-                    foreach (IMessage msg in toDelete)
-                        await msg.DeleteAsync(); // could be rate limited so might be slow.
+                    await ReplyAsync("Can't delete more than 100 messages or messages that are over 14 days old."); // Discord doesn't like removing more than 100 messages at a time via the API
             }
             catch (ArgumentOutOfRangeException)
             {
-                await ReplyAsync($"Some or all of the messages were older than 14 days. These can not be bulk deleted.");
+                await ReplyAsync($"Some or all of the messages were older than 14 days. These can not be bulk deleted."); // Discord doesn't like us removing messages over 14 days old.
                 throw;
             }
         }
-        */
+        
 
         [Command("Topic")]
         [Summary("Changes the topic of the current channel.")]
