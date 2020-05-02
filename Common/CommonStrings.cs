@@ -6,7 +6,7 @@ namespace Booper.Common
         // Bot strings
 
         // Major.Minor.Patch Release
-        private const string botVersion = "1.0.7";
+        private const string botVersion = "1.0.8";
         public static string BotVersion { get => botVersion; }
 
 
