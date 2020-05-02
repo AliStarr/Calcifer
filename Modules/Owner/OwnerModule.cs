@@ -1,5 +1,5 @@
-﻿using Booper.Common;
-using Booper.Preconditions;
+﻿using Calcifer.Common;
+using Calcifer.Preconditions;
 
 using Discord;
 using Discord.Commands;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 
 
-namespace Booper.Modules.Owner
+namespace Calcifer.Modules.Owner
 {
     [MinPermissions(AccessLevel.BotOwner)]
     public class OwnerModule : ModuleBase<SocketCommandContext>

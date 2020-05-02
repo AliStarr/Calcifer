@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 
 
-namespace Booper.Modules
+namespace Calcifer.Modules
 {
     public class ConvertersModule : ModuleBase
     {

@@ -6,7 +6,7 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace Booper.Services
+namespace Calcifer.Services
 {
     public class CommandHandlingService
     {

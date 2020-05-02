@@ -1,11 +1,11 @@
-﻿using Booper.Common;
+﻿using Calcifer.Common;
 using Discord;
 using Discord.Commands;
 
 using System;
 using System.Threading.Tasks;
 
-namespace Booper.Modules.Games
+namespace Calcifer.Modules.Games
 {
     public class GamesModule : ModuleBase<SocketCommandContext>
     {

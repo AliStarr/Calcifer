@@ -1,4 +1,4 @@
-﻿namespace Booper.Common
+﻿namespace Calcifer.Common
 {
     /// <summary>
     /// The enum used to specify permission levels. A lower

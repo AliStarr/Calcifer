@@ -1,5 +1,5 @@
-﻿using Booper.Common;
-using Booper.Preconditions;
+﻿using Calcifer.Common;
+using Calcifer.Preconditions;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Booper.Modules
+namespace Calcifer.Modules
 {
     public class PublicModule : ModuleBase
     {

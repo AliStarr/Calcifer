@@ -1,5 +1,5 @@
-﻿using Booper.Common;
-using Booper.Services;
+﻿using Calcifer.Common;
+using Calcifer.Services;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Booper
+namespace Calcifer
 {
     class Program
     {

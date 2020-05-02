@@ -1,6 +1,6 @@
-﻿using Booper.Common;
-using Booper.Preconditions;
-using Booper.Services;
+﻿using Calcifer.Common;
+using Calcifer.Preconditions;
+using Calcifer.Services;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Booper.Modules.Bot
+namespace Calcifer.Modules.Bot
 {
     [MinPermissions(AccessLevel.BotOwner)]
     [Group("Set")]

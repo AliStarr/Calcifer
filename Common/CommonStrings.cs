@@ -1,5 +1,5 @@
 ﻿
-namespace Booper.Common
+namespace Calcifer.Common
 {
     public static class CommonStrings
     {

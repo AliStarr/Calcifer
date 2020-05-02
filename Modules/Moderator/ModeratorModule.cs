@@ -1,5 +1,5 @@
-﻿using Booper.Common;
-using Booper.Preconditions;
+﻿using Calcifer.Common;
+using Calcifer.Preconditions;
 
 using Discord;
 using Discord.Commands;
@@ -7,7 +7,7 @@ using Discord.WebSocket;
 using System;
 using System.Threading.Tasks;
 
-namespace Booper.Modules.Moderator
+namespace Calcifer.Modules.Moderator
 {
     [MinPermissions(AccessLevel.ServerMod)]
     [RequireContext(ContextType.Guild)]

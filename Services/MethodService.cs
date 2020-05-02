@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Booper.Services
+namespace Calcifer.Services
 {
     public static class MethodService
     {

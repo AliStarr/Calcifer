@@ -1,11 +1,11 @@
-﻿using Booper.Common;
+﻿using Calcifer.Common;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Threading.Tasks;
 
-namespace Booper.Preconditions
+namespace Calcifer.Preconditions
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class MinPermissionsAttribute : PreconditionAttribute
