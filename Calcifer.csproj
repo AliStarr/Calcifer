@@ -3,8 +3,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <StartupObject>Booper.Program</StartupObject>
+    <StartupObject>Calcifer.Program</StartupObject>
     <Authors>Alister Haseldine</Authors>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.0.8</Version>
+    <PackageProjectUrl>https://github.com/AliStarr/Calcifer</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

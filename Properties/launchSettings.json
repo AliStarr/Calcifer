@@ -1,7 +1,8 @@
 {
   "profiles": {
-    "Booper": {
-      "commandName": "Project"
+    "Calcifer": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\alist\\source\\repos\\Calcifer\\bin\\Release\\netcoreapp3.0\\Booper.exe"
     }
   }
 }

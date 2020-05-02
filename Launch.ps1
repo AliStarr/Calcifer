@@ -1,7 +1,7 @@
 ﻿$loop = 1;
 while ($loop)
 {
-    $process = Start-Process "\Booper.exe" -Wait -NoNewWindow -PassThru
+    $process = Start-Process "\Calcifer.exe" -Wait -NoNewWindow -PassThru
     switch ($process.ExitCode)
     {
         0 {"Restarting..."; Start-Sleep -s 3}
