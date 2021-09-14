@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <StartupObject>Calcifer.Program</StartupObject>
     <Authors>Alister Haseldine</Authors>
     <SignAssembly>false</SignAssembly>
@@ -10,16 +10,20 @@
     <PackageProjectUrl>https://github.com/AliStarr/Calcifer</PackageProjectUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants />
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="CommandSnip.snippet" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.2.0" />
-    <PackageReference Include="Discord.Net.Commands" Version="2.2.0" />
-    <PackageReference Include="Discord.Net.Core" Version="2.2.0" />
-    <PackageReference Include="Discord.Net.WebSocket" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Discord.Net" Version="2.4.0" />
+    <PackageReference Include="Discord.Net.Commands" Version="2.4.0" />
+    <PackageReference Include="Discord.Net.Core" Version="2.4.0" />
+    <PackageReference Include="Discord.Net.WebSocket" Version="2.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
     <PackageReference Include="UnitsNet" Version="4.42.0" />
   </ItemGroup>
