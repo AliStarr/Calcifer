@@ -47,8 +47,45 @@ namespace Calcifer
 
         private Task LogAsync(LogMessage log)
         {
-            Console.WriteLine(log.ToString());
-            return Task.CompletedTask;
+            switch (log.Severity)
+            {
+                case LogSeverity.Critical:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.WriteLine("Critical: " + log.ToString());
+                    return Task.CompletedTask;
+
+                case LogSeverity.Error:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: " + log.ToString());
+                    return Task.CompletedTask;
+
+                case LogSeverity.Warning:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Warning: " + log.ToString());
+                    return Task.CompletedTask;
+
+                case LogSeverity.Info:
+
+                    Console.WriteLine("Info: " + log.ToString());
+                    return Task.CompletedTask;
+
+                case LogSeverity.Verbose:
+
+                    Console.WriteLine("Verbose: " + log.ToString());
+                    return Task.CompletedTask;
+
+                case LogSeverity.Debug:
+
+                    Console.WriteLine("Debug: " + log.ToString());
+                    return Task.CompletedTask;
+                default:
+
+                    Console.WriteLine(log.ToString());
+                    return Task.CompletedTask;
+            }
+
+            
         }
 
         private ServiceProvider ConfigureServices() => new ServiceCollection()
