@@ -89,7 +89,7 @@ namespace Calcifer.Modules
                 await ReplyAsync("Couldn't find anything with that input");
                 return;
             }
-            Random r = new Random();
+            Random r = new();
             string outpt = "Failed fetching embed from Urban Dictionary, please try later!";
             string outpt2 = "No Example";
             int max = r.Next(0, col.Count);
@@ -159,7 +159,7 @@ namespace Calcifer.Modules
                 $"**Author: **{application.Owner.Mention} ID ({application.Owner.Id})\n" +
                 // $"**Github Repo: **{CommonStrings.gitRepo}\n" +
                 $"**Discord .Net Libary version: **{DiscordConfig.Version}\n" +
-                $"**Bot Version and Release: **{Program.version}\n" +
+                $"**Bot Version and Release: **{Program.Version}\n" +
                 $"**Runtime: **{RuntimeInformation.FrameworkDescription}\n" +
                 $"**Uptime (D.H:M:S): **{GetUpTime()}\n\n" +
                 $"**Heap Size: **{GetHeapSize()}MB\n" +

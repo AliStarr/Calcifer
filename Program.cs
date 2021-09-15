@@ -15,8 +15,10 @@ namespace Calcifer
 {
     public class Program
     {
-        static string assemLoc = Assembly.GetExecutingAssembly().Location;
-        public static string version = FileVersionInfo.GetVersionInfo(assemLoc).FileVersion;
+        static readonly string assemLoc = Assembly.GetExecutingAssembly().Location;
+        private static string version = FileVersionInfo.GetVersionInfo(assemLoc).FileVersion;
+
+        public static string Version { get => version; set => version = value; }
 
         static void Main()
             => new Program().MainAsync().GetAwaiter().GetResult();
@@ -26,7 +28,7 @@ namespace Calcifer
             // Get version number
             
 
-            Console.Title = $"Calcifer version {version}";
+            Console.Title = $"Calcifer version {Version}";
 
             string discordToken = ConfigurationManager.AppSettings["discord"];  // Grab token
             using var services = ConfigureServices();
@@ -40,7 +42,7 @@ namespace Calcifer
             await client.StartAsync();
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
-            await client.SetGameAsync($"Version: {version}");
+            await client.SetGameAsync($"Version: {Version}");
 
             await Task.Delay(-1);
         }
