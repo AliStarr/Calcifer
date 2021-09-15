@@ -5,12 +5,7 @@ namespace Calcifer.Common
     {
         // Bot strings
 
-        // Major.Minor.Patch Release
-        private const string botVersion = "1.0.8";
-        public static string BotVersion { get => botVersion; }
-
-
-        public static string gitRepo = "";
+        public static string gitRepo = "https://github.com/AliStarr/Calcifer";
 
         //8ball
         public static string[] answers =

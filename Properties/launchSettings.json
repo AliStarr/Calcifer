@@ -2,7 +2,7 @@
   "profiles": {
     "Calcifer": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\alist\\source\\repos\\Calcifer\\bin\\Release\\netcoreapp3.0\\Booper.exe"
+      "executablePath": "D:\\Repos\\C#\\Calcifer\\bin\\Debug\\net5.0\\Calcifer.exe"
     }
   }
 }

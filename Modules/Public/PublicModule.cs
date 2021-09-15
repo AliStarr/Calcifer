@@ -1,4 +1,5 @@
-﻿using Calcifer.Common;
+﻿using Calcifer;
+using Calcifer.Common;
 using Calcifer.Preconditions;
 using Discord;
 using Discord.Commands;
@@ -158,7 +159,7 @@ namespace Calcifer.Modules
                 $"**Author: **{application.Owner.Mention} ID ({application.Owner.Id})\n" +
                 // $"**Github Repo: **{CommonStrings.gitRepo}\n" +
                 $"**Discord .Net Libary version: **{DiscordConfig.Version}\n" +
-                $"**Bot Version and Release: **{CommonStrings.BotVersion}\n" +
+                $"**Bot Version and Release: **{Program.version}\n" +
                 $"**Runtime: **{RuntimeInformation.FrameworkDescription}\n" +
                 $"**Uptime (D.H:M:S): **{GetUpTime()}\n\n" +
                 $"**Heap Size: **{GetHeapSize()}MB\n" +
