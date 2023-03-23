@@ -56,7 +56,6 @@ namespace Calcifer.Modules.Moderator
             await ReplyAsync($"{Context.User.Mention} unbanned {user.Mention}.");
         }
 
-        
         [Command("Purge")]
         [Summary("Deletes the specified amout of messages from the channel. (Limit 100)")]
         [Remarks("~Purge <amount>")]
@@ -83,7 +82,6 @@ namespace Calcifer.Modules.Moderator
             }
         }
         
-
         [Command("Topic")]
         [Summary("Changes the topic of the current channel.")]
         [Remarks("~topic <Text to input into the topic>")]

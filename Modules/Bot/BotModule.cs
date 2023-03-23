@@ -26,7 +26,6 @@ namespace Calcifer.Modules.Bot
             var client = Context.Client as DiscordSocketClient;
             await Context.Client.CurrentUser.ModifyAsync(x => x.Username = value).ConfigureAwait(false);
             await ReplyAsync("Username updated :ok:").ConfigureAwait(false);
-
         }
 
         [Command("Game"), RequireContext(ContextType.Guild)]
@@ -65,7 +64,6 @@ namespace Calcifer.Modules.Bot
                 File.Delete(q.LocalPath.Replace("/", ""));
             }
             await ReplyAsync("Bot Avatar Updated!").ConfigureAwait(false);
-
         }
 
         // Can be either Offline, Online, Idle, AFK, DoNotDisturb or Invisible

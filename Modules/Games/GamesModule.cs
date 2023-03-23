@@ -16,7 +16,6 @@ namespace Calcifer.Modules.Games
         {
             if (sides < 2)
                 await ReplyAsync("Die must have 2 or more sides.");
-
             else
             {
                 int result;

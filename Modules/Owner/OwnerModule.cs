@@ -42,7 +42,6 @@ namespace Calcifer.Modules.Owner
             rndResult = rnd.Next(1, CommonStrings.restartStrings.Length);
             await ReplyAsync(CommonStrings.restartStrings[rndResult]);
             Environment.Exit(0);
-
         }
         
         [Command("ServerList")]
