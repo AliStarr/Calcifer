@@ -26,7 +26,7 @@ namespace Calcifer.Modules
                     result = (temp - 32) * 5 / 9;
 
                 if (fromMetric == 'f' && toMetric == 'k') // Farenheit TO Kelvin
-                    result = (temp - 32) * (5 / 9 + 273);
+                    result = result = ((temp - 32) * 5 / 9) + 273;
 
                 if (fromMetric == 'k' && toMetric == 'c') // Kelvin TO Celcius
                     result = temp - 273;
