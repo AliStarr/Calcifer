@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
     <StartupObject>Calcifer.Program</StartupObject>
     <Authors>Alister Haseldine</Authors>
     <SignAssembly>false</SignAssembly>
@@ -11,6 +10,7 @@
     <FileVersion>1.0.31.0</FileVersion>
     <ApplicationIcon />
     <Platforms>AnyCPU;x64</Platforms>
+    <TargetFramework>net7.0-windows</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Calcifer
 {
@@ -25,7 +26,7 @@ namespace Calcifer
             // its documentation for the best way to do this.
             using (var services = ConfigureServices())
             {
-                var client = services.GetRequiredService<DiscordShardedClient>();
+                var client = services.GetRequiredService<DiscordSocketClient>();
 
                 // Strat logging
                 client.Log += LogAsync;
@@ -33,7 +34,8 @@ namespace Calcifer
 
                 // Tokens should be considered secret data and never hard-coded.
                 // We can read from the environment variable to avoid hard coding.
-                await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("token"));
+                string token = ConfigurationManager.AppSettings["discord"];
+                await client.LoginAsync(TokenType.Bot, token);
                 await client.StartAsync();
 
                 // Here we init the logic required to register our commands
