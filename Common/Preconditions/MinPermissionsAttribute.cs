@@ -51,5 +51,4 @@ namespace Calcifer.Preconditions
             return AccessLevel.User;
         }
     }
-
 }

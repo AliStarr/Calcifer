@@ -47,7 +47,6 @@ namespace Calcifer.Services
             // then execute the command if one is matched.
             await _commands.ExecuteAsync(context, argPos, _services);
             // Note that normally a result will be returned by this format but here we will handle the result in CommandExecutedAsync.
-
         }
 
         public async Task CommandExecutedAsync(Optional<CommandInfo> command, ICommandContext context, IResult result)

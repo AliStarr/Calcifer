@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 
-
 namespace Calcifer.Modules
 {
     public class ConvertersModule : ModuleBase
@@ -27,7 +26,7 @@ namespace Calcifer.Modules
                     result = (temp - 32) * 5 / 9;
 
                 if (fromMetric == 'f' && toMetric == 'k') // Farenheit TO Kelvin
-                    result = (temp - 32) * (5 / 9) + 273;
+                    result = (temp - 32) * (5 / 9 + 273);
 
                 if (fromMetric == 'k' && toMetric == 'c') // Kelvin TO Celcius
                     result = temp - 273;
