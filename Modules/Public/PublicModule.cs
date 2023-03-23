@@ -89,7 +89,7 @@ namespace Calcifer.Modules
                 await ReplyAsync("Couldn't find anything with that input");
                 return;
             }
-            Random r = new();
+            Random r = new Random();
             string outpt = "Failed fetching embed from Urban Dictionary, please try later!";
             string outpt2 = "No Example";
             int max = r.Next(0, col.Count);
@@ -138,7 +138,6 @@ namespace Calcifer.Modules
             embed.Description = $"**Guild ID: **{gld.Id}\n**Guild Owner: **{gld.GetOwnerAsync().GetAwaiter().GetResult().Mention}\n" +
                 $"**Default Channel: **{gld.GetDefaultChannelAsync().GetAwaiter().GetResult().Mention}\n**Voice Region: **{gld.VoiceRegionId}\n" +
                 $"**Created At: **{gld.CreatedAt}\n**Available? **{gld.Available}\n" +
-                $"**Default Msg Notif: **{gld.DefaultMessageNotifications}\n**Embeddable? **{gld.IsEmbeddable}\n" +
                 $"**MFA Level: **{gld.MfaLevel}\n**Verification Level: **{gld.VerificationLevel}\n";
             await ReplyAsync("", false, embed.Build());
         }
@@ -157,9 +156,9 @@ namespace Calcifer.Modules
             embed.Title = $"Calcifer  info and stats";
             embed.Description =
                 $"**Author: **{application.Owner.Mention} ID ({application.Owner.Id})\n" +
-                // $"**Github Repo: **{CommonStrings.gitRepo}\n" +
+                $"**Github Repo: **{CommonStrings.gitRepo}\n" +
                 $"**Discord .Net Libary version: **{DiscordConfig.Version}\n" +
-                $"**Bot Version and Release: **{Program.Version}\n" +
+                $"**Bot Version and Release: **\n" +
                 $"**Runtime: **{RuntimeInformation.FrameworkDescription}\n" +
                 $"**Uptime (D.H:M:S): **{GetUpTime()}\n\n" +
                 $"**Heap Size: **{GetHeapSize()}MB\n" +

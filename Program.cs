@@ -1,54 +1,51 @@
-﻿using Calcifer.Common;
-using Calcifer.Services;
+﻿using Calcifer.Services;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
-using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Diagnostics;
 
 namespace Calcifer
 {
     public class Program
     {
-        static readonly string assemLoc = Assembly.GetExecutingAssembly().Location;
-        private static string version = FileVersionInfo.GetVersionInfo(assemLoc).FileVersion;
 
-        public static string Version { get => version; set => version = value; }
+        // There is no need to implement IDisposable like before as we are
+        // using dependency injection, which handles calling Dispose for us.
+        static void Main(string[] args)
+            => new Program().RunAsync().GetAwaiter().GetResult();
 
-        static void Main()
-            => new Program().MainAsync().GetAwaiter().GetResult();
-
-        public async Task MainAsync()
+        public async Task RunAsync()
         {
-            // Get version number
-            
+            // You should dispose a service provider created using ASP.NET
+            // when you are finished using it, at the end of your app's lifetime.
+            // If you use another dependency injection framework, you should inspect
+            // its documentation for the best way to do this.
+            using (var services = ConfigureServices())
+            {
+                var client = services.GetRequiredService<DiscordShardedClient>();
 
-            Console.Title = $"Calcifer version {Version}";
+                // Strat logging
+                client.Log += LogAsync;
+                services.GetRequiredService<CommandService>().Log += LogAsync;
 
-            string discordToken = ConfigurationManager.AppSettings["discord"];  // Grab token
-            using var services = ConfigureServices();
-            var client = services.GetRequiredService<DiscordSocketClient>();
+                // Tokens should be considered secret data and never hard-coded.
+                // We can read from the environment variable to avoid hard coding.
+                await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("token"));
+                await client.StartAsync();
 
-            client.Log += LogAsync; // Start logging
-            services.GetRequiredService<CommandService>().Log += LogAsync;
+                // Here we init the logic required to register our commands
+                await services.GetRequiredService<CommandHandlingService>().InitalizeAsync();
 
-            await client.LoginAsync(TokenType.Bot, discordToken);   // Login
-
-            await client.StartAsync();
-            await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
-
-            await client.SetGameAsync($"Version: {Version}");
-
-            await Task.Delay(-1);
+                await Task.Delay(Timeout.Infinite);
+            }
         }
 
-        private Task LogAsync(LogMessage log)
+        static Task LogAsync(LogMessage log)
         {
+            // TODO: Add logging to file
             switch (log.Severity)
             {
                 case LogSeverity.Critical:
@@ -87,14 +84,16 @@ namespace Calcifer
                     return Task.CompletedTask;
             }
 
-            
+
         }
 
-        private ServiceProvider ConfigureServices() => new ServiceCollection()
-                .AddSingleton<DiscordSocketClient>()
-                .AddSingleton<CommandService>()
-                .AddSingleton<CommandHandlingService>()
-                .AddSingleton<HttpClient>()
-                .BuildServiceProvider();
+        static ServiceProvider ConfigureServices()
+        {
+            return new ServiceCollection()
+                  .AddSingleton<DiscordSocketClient>()
+                  .AddSingleton<CommandService>()
+                  .AddSingleton<CommandHandlingService>()
+                  .BuildServiceProvider();
+        }
     }
 }
