@@ -12,7 +12,6 @@ namespace Calcifer
 {
     public class Program
     {
-
         // There is no need to implement IDisposable like before as we are
         // using dependency injection, which handles calling Dispose for us.
         static void Main(string[] args)
@@ -85,8 +84,6 @@ namespace Calcifer
                     Console.WriteLine(log.ToString());
                     return Task.CompletedTask;
             }
-
-
         }
 
         static ServiceProvider ConfigureServices()

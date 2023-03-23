@@ -11,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 namespace Calcifer.Modules.Owner
 {
     [MinPermissions(AccessLevel.BotOwner)]
@@ -47,7 +45,6 @@ namespace Calcifer.Modules.Owner
 
         }
         
-
         [Command("ServerList")]
         [Summary("Gets all the servers the bot is connected to.")]
         [Remarks("~Serverlist")]

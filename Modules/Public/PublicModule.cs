@@ -16,7 +16,6 @@ namespace Calcifer.Modules
 {
     public class PublicModule : ModuleBase
     {
-
         [MinPermissions(AccessLevel.BotOwner)]
         [Command("Invite")]
         [Summary("Creates an Oauth2 invite for the bot.")]
@@ -27,7 +26,6 @@ namespace Calcifer.Modules
             await ReplyAsync($"A user with 'MANAGE_SERVER' can invite me to your server here:" +
                 $" <https://discordapp.com/oauth2/authorize?client_id={application.Id}&scope=bot>");
         }
-
 
         [Command("Say")]
         [Alias("echo")]

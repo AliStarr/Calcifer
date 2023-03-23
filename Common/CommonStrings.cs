@@ -27,7 +27,5 @@ namespace Calcifer.Common
         {
             "Later, nerds", "Bye!", "Seeya!", "Adios", "Good Bye! :wave:", ":sleeping: Good night", "Night night :zzz:", "IM OUT! :v:"
         };
-
-        
     }
 }
