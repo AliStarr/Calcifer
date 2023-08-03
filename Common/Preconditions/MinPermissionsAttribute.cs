@@ -30,10 +30,10 @@ namespace Calcifer.Preconditions
         {
             if (c.User.IsBot)
                 return AccessLevel.Blocked;
-            if (c.User.Id == c.Guild.OwnerId) // Server owner is usally me
+            if (c.User.Id == c.Guild.OwnerId)
                 return AccessLevel.BotOwner;
 
-            var user = c.User as SocketGuildUser;
+            SocketGuildUser user = c.User as SocketGuildUser;
 
             if (user != null)
             {

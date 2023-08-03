@@ -38,8 +38,8 @@ namespace Calcifer.Modules
             }
             catch (Exception ex)
             {
-                await ReplyAsync($"Exception thrown!!!\n{ex.Message}\nEND OF EXCEPTION MESSAGE\n" +
-                    $"Message ALister with **~bugreport**");
+                await ReplyAsync($"Exception thrown!\n{ex.Message}\nEND OF EXCEPTION MESSAGE\n" +
+                    $"Message the awful person who made this with **~bugreport**");
                 throw;
             }
         }

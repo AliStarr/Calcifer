@@ -30,7 +30,7 @@ namespace Calcifer.Services
         public async Task MessageReceivedAsync(SocketMessage rawMessage)
         {
             // Ignore system messages, or messages from other bots.
-            if (!(rawMessage is SocketUserMessage message))
+            if (rawMessage is not SocketUserMessage message)
                 return;
             if (message.Source != MessageSource.User)
                 return;
@@ -39,7 +39,7 @@ namespace Calcifer.Services
             var argPos = 0;
 
             //Perform prefix check
-            if (!message.HasCharPrefix('~', ref argPos))
+            if (!message.HasCharPrefix('~', ref argPos)) // TODO: Move this to a non hardcoded value
                 return;
 
             var context = new SocketCommandContext(_discord, message);

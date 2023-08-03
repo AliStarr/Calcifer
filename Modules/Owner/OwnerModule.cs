@@ -16,7 +16,7 @@ namespace Calcifer.Modules.Owner
     [MinPermissions(AccessLevel.BotOwner)]
     public class OwnerModule : ModuleBase<SocketCommandContext>
     {
-        Random rnd = new Random();
+        readonly Random rnd = new();
         int rndResult;
 
         [Command("Stop")]

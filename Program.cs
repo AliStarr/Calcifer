@@ -18,7 +18,7 @@ namespace Calcifer
 
         // There is no need to implement IDisposable like before as we are
         // using dependency injection, which handles calling Dispose for us.
-        static void Main(string[] args)
+        static void Main()
             => new Program().RunAsync().GetAwaiter().GetResult();
 
         public async Task RunAsync()
@@ -27,25 +27,23 @@ namespace Calcifer
             // when you are finished using it, at the end of your app's lifetime.
             // If you use another dependency injection framework, you should inspect
             // its documentation for the best way to do this.
-            using (var services = ConfigureServices())
-            {
-                var client = services.GetRequiredService<DiscordSocketClient>();
+            using var services = ConfigureServices();
+            var client = services.GetRequiredService<DiscordSocketClient>();
 
-                // Strat logging
-                client.Log += LogAsync;
-                services.GetRequiredService<CommandService>().Log += LogAsync;
+            // Strat logging
+            client.Log += LogAsync;
+            services.GetRequiredService<CommandService>().Log += LogAsync;
 
-                // Tokens should be considered secret data and never hard-coded.
-                // We can read from the environment variable to avoid hard coding.
-                string token = ConfigurationManager.AppSettings["discord"];
-                await client.LoginAsync(TokenType.Bot, token);
-                await client.StartAsync();
+            // Tokens should be considered secret data and never hard-coded.
+            // We can read from the environment variable to avoid hard coding.
+            string token = ConfigurationManager.AppSettings["discord"];
+            await client.LoginAsync(TokenType.Bot, token);
+            await client.StartAsync();
 
-                // Here we init the logic required to register our commands
-                await services.GetRequiredService<CommandHandlingService>().InitalizeAsync();
+            // Here we init the logic required to register our commands
+            await services.GetRequiredService<CommandHandlingService>().InitalizeAsync();
 
-                await Task.Delay(Timeout.Infinite);
-            }
+            await Task.Delay(Timeout.Infinite);
         }
 
         
@@ -55,10 +53,8 @@ namespace Calcifer
             string fileName = "log.txt";
             content += Environment.NewLine;
             byte[] bytes = Encoding.UTF8.GetBytes(content);
-            using (FileStream fs = new(fileName, FileMode.Append))
-            {
-                fs.Write(bytes, 0, bytes.Length);
-            }
+            using FileStream fs = new(fileName, FileMode.Append);
+            fs.Write(bytes, 0, bytes.Length);
         }
 
         static Task LogAsync(LogMessage log)

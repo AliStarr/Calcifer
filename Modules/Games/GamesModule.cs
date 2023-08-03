@@ -19,7 +19,7 @@ namespace Calcifer.Modules.Games
             else
             {
                 int result;
-                Random rnd = new Random();
+                Random rnd = new();
                 result = rnd.Next(1, sides + 1); // the maxValue of Random() is exclusive, so it will never return the max value.
                 if (result == sides)
                 {
@@ -54,9 +54,9 @@ namespace Calcifer.Modules.Games
         public async Task EightBallAsync([Remainder] string input)
         {
             int result;
-            Random rnd = new Random();
-            result = rnd.Next(0, CommonStrings.answers.Length + 1);   // The maxValue of Random() is exclusive, so it will never return the max value
-                                                                      // and I cant be fucked looking at how many items are in the array.
+            Random rnd = new();
+            result = rnd.Next(0, CommonStrings.answers.Length + 1);   // I can't be fucked looking at how many items are in the array.
+
             var embed = new EmbedBuilder()
             {
                 Title = "Magic 8Ball",
@@ -72,7 +72,7 @@ namespace Calcifer.Modules.Games
         public async Task FlipAsync()
         {
             int result;
-            Random rnd = new Random();
+            Random rnd = new();
             result = rnd.Next(2);
             if (result == 0)
                await ReplyAsync("Heads");
