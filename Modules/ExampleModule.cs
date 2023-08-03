@@ -11,7 +11,7 @@ namespace Calcifer.Modules
         [SlashCommand("say", "Make the bot say something.")]
         [RequireUserPermission(GuildPermission.Administrator)]
         public Task Say(string text)
-            => ReplyAsync(text);
+            => RespondAsync(text);
 
         [SlashCommand("nick", "Change a user's nickname to the specified text")]
         [RequireContext(ContextType.Guild)]
