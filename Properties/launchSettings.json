@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Calcifer": {
-      "commandName": "Executable",
-      "executablePath": "D:\\Repos\\C#\\Calcifer\\bin\\Debug\\net7.0-windows\\Calcifer.exe"
-    }
-  }
-}
