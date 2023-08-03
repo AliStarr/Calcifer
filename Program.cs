@@ -1,14 +1,10 @@
 ﻿using Calcifer.Services;
-using Discord;
-using Discord.Commands;
-using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Discord.WebSocket;
 using Discord.Interactions;
-using Calcifer.Services;
-using Microsoft.Extensions.Hosting;
+using Discord.WebSocket;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 
 
 
