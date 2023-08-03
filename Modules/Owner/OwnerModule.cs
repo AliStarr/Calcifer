@@ -65,7 +65,7 @@ namespace Calcifer.Modules.Owner
             embed.Color = new Color(255, 210, 50);
             embed.Footer = new EmbedFooterBuilder()
             {
-                Text = $"Total Guilds: {client.Guilds.Count.ToString()}"
+                Text = $"Total Guilds: {client.Guilds.Count}"
             };
             await ReplyAsync("", embed: embed.Build());
         }
@@ -108,6 +108,6 @@ namespace Calcifer.Modules.Owner
         }
 
         private static MemoryStream GenerateStreamFromString(string value) 
-            => new MemoryStream(Encoding.Unicode.GetBytes(value ?? ""));
+            => new(Encoding.Unicode.GetBytes(value ?? ""));
     }
 }
