@@ -1,14 +1,19 @@
-﻿using Discord;
+﻿using Calcifer.Utility;
+using Discord;
 using Discord.Commands;
 using Discord.Interactions;
 using Discord.WebSocket;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Hosting;
 
 namespace Calcifer.Modules
 {
@@ -135,13 +140,40 @@ namespace Calcifer.Modules
         [SlashCommand("bug", "Pings Alister with bug report info")]
         public async Task ReportBug()
         {
-            await ReplyAsync("Pinging Alister to tell him that he sucks at programming...");
+            await RespondAsync("Pinging Alister to tell him that he sucks at programming...");
             var msg = $"{Context.User.Mention} submitted a bug report! Guild: {Context.Guild.Name} Channel: {Context.Channel.Name}.";
             var dmChannel = await Context.Guild.Owner.CreateDMChannelAsync();
             await dmChannel.SendMessageAsync(msg);
             await RespondAsync(":ok:");
         }
 
+        [SlashCommand("apotd", "NASA astronomy picture of the day.")]
+        public async Task APOTD()
+        {
+            var embed = new EmbedBuilder();
+            // Quick and dirty JSON API consumer.
+            HttpClient client = new();
+            HttpResponseMessage response = await client.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
+            response.EnsureSuccessStatusCode();
+            string resposeBody = await response.Content.ReadAsStringAsync();
+            var jsonify = JsonConvert.DeserializeObject<APOTDHelper>(resposeBody);
+
+            embed.ImageUrl = jsonify.URL.ToString();
+            embed.Title = jsonify.Title;
+            embed.WithAuthor(x =>
+            {
+                x.Name = "NASA Astronomy Picture Of The Day";
+            });
+            embed.WithFooter(x =>
+            {
+                x.Text = $"HD Image link: {jsonify.HDUrl}\n{jsonify.Copyright}";
+            });
+            embed.Description = $"{jsonify.Explanation}";
+
+            await RespondAsync("", embed: embed.Build());
+        }
+
+        // Helpers
         private static string GetUpTime()
             => (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
 
