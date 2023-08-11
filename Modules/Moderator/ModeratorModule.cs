@@ -61,7 +61,7 @@ namespace Calcifer.Modules.Moderator
             }
         }
 
-        [SlashCommand("topic", "Chnages the channels topic.")]
+        [SlashCommand("topic", "Changes the channels topic.")]
         public async Task ChangeTopic(string input)
         {
             var channel = (ITextChannel)Context.Channel;

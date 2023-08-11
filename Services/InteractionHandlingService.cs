@@ -16,7 +16,7 @@ namespace Calcifer.Services
         private readonly DiscordSocketClient _discord;
         private readonly InteractionService _interactions;
         private readonly IServiceProvider _services;
-        private readonly IConfiguration _config;
+        private readonly IConfiguration _config; // Unsure why this is complaining about being unused
         private readonly ILogger<InteractionService> _logger;
 
         public InteractionHandlingService(DiscordSocketClient discord, InteractionService interaction, IServiceProvider service, IConfiguration config, ILogger<InteractionService> logger)
@@ -24,7 +24,7 @@ namespace Calcifer.Services
             _discord = discord;
             _interactions = interaction;
             _services = service;
-            _config = config;
+            _config = config; // it's clearly used here
             _logger = logger;
 
             _interactions.Log += msg => LogHelper.OnLogAsync(_logger, msg);            

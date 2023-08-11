@@ -66,7 +66,7 @@ namespace Calcifer.Modules.Bot
         //    await RespondAsync("Bot Avatar Updated!").ConfigureAwait(false);
         //}
 
-        string[] allowedStatus = { "Offline", "Online", "Idle", "AFK", "Do Not Disturb", "Invisible" };
+        readonly string[] allowedStatus = { "Offline", "Online", "Idle", "AFK", "Do Not Disturb", "Invisible" };
         // Can be either Offline, Online, Idle, AFK, DoNotDisturb or Invisible
         [SlashCommand("status","Set the bots status. Can be Offline, Online, Idle, AFK, Do Not Disturb or Invisible")]
         public async Task Status(string value)
