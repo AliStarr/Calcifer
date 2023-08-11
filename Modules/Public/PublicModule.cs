@@ -112,7 +112,6 @@ namespace Calcifer.Modules
             await RespondAsync("", embed: embed.Build());
         }
 
-
         [SlashCommand("info", "Displays Bot Information")]
         public async Task Info()
         {
@@ -176,7 +175,6 @@ namespace Calcifer.Modules
         // Helpers
         private static string GetUpTime()
             => (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
-
         private static string GetHeapSize()
             => Math.Round(GC.GetTotalMemory(true) / (1024.0 * 1024.0), 2).ToString();
     }

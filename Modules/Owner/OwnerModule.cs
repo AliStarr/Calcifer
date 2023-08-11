@@ -82,14 +82,11 @@ namespace Calcifer.Modules.Owner
         }
 
         [SlashCommand("broadcast", "Sends a message to the default channel of all connected servers.")]
-        public async Task AsyncBroadcast(string msg)
+        public async Task Broadcast(string msg)
         {
             var glds = (Context.Client as DiscordSocketClient).Guilds;
             var defaultchan = glds.Select(g => g.GetChannel(g.Id)).Cast<ITextChannel>();
             await Task.WhenAll(defaultchan.Select(c => c.SendMessageAsync(msg)));
         }
-
-        private static MemoryStream GenerateStreamFromString(string value)
-            => new(Encoding.Unicode.GetBytes(value ?? ""));
     }
 }
