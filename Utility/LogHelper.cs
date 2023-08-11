@@ -6,6 +6,7 @@ namespace Calcifer
 {
     public static class LogHelper
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2254:Template should be a static expression", Justification = "Shutup")]
         public static Task OnLogAsync(ILogger logger, LogMessage msg)
         {
             switch (msg.Severity)
