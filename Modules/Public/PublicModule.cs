@@ -124,9 +124,9 @@ namespace Calcifer.Modules
                 $"**Github Repo: **https://github.com/AliStarr/Calcifer\n" +
                 $"**Discord .Net Libary version: **{DiscordConfig.Version}\n" +
                 $"**Bot Version and Release: **\n" +
-                $"**Runtime: **{RuntimeInformation.FrameworkDescription}\n" +
+                $"**.Net Framework: **{RuntimeInformation.FrameworkDescription}\n" +
                 $"**Uptime (D.H:M:S): **{GetUpTime()}\n\n" +
-                $"**Heap Size: **{GetHeapSize()}MB\n" +
+                $"**Current Memory Usage: **{GetCurrentMemoryUsage()}MB\n" +
                 $"**Guilds: **{(Context.Client as DiscordSocketClient).Guilds.Count}\n" +
                 $"**Channels: **{(Context.Client as DiscordSocketClient).Guilds.Sum(g => g.Channels.Count)}\n" +
                 $"**Users: **{(Context.Client as DiscordSocketClient).Guilds.Sum(g => g.Users.Count)}\n";
@@ -181,7 +181,7 @@ namespace Calcifer.Modules
         // Helpers
         private static string GetUpTime()
             => (DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss");
-        private static string GetHeapSize()
-            => Math.Round(GC.GetTotalMemory(true) / (1024.0 * 1024.0), 2).ToString();
+        private static string GetCurrentMemoryUsage()
+            => Math.Round(Process.GetCurrentProcess().PrivateMemorySize64 / (1024.0 * 1024.0), 2).ToString();
     }
 }
