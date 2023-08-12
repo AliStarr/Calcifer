@@ -4,16 +4,13 @@ using Discord.Commands;
 using Discord.Interactions;
 using Discord.WebSocket;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Microsoft.Extensions.Hosting;
 
 namespace Calcifer.Modules
 {
@@ -41,7 +38,7 @@ namespace Calcifer.Modules
             {
                 throw new NullReferenceException("Please provide a search term");
             }
-                
+
             var embed = new EmbedBuilder();
             var vc = new HttpClient();
             embed.WithAuthor(x =>
@@ -103,7 +100,7 @@ namespace Calcifer.Modules
             {
                 embed.ThumbnailUrl = gld.IconUrl;
             }
-                
+
             embed.Color = new Color(153, 30, 87);
             embed.Title = $"{gld.Name} Information";
             embed.Description = $"**Guild ID: **{gld.Id}\n**Guild Owner: **{gld.Owner.Mention}\n" +
@@ -153,7 +150,16 @@ namespace Calcifer.Modules
             // Quick and dirty JSON API consumer.
             HttpClient client = new();
             HttpResponseMessage response = await client.GetAsync("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
-            response.EnsureSuccessStatusCode();
+           try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException ex)
+            {
+                await RespondAsync($"Got non-success response. {response.StatusCode} {response.ReasonPhrase}\n\nEXCEPTION: {ex.Message}");
+                return;
+            }
+            
             string resposeBody = await response.Content.ReadAsStringAsync();
             var jsonify = JsonConvert.DeserializeObject<APOTDHelper>(resposeBody);
 

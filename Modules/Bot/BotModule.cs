@@ -19,7 +19,7 @@ namespace Calcifer.Modules.Bot
             {
                 await RespondAsync("Input can not be empty.");
             }
-                
+
             var client = Context.Client as DiscordSocketClient;
             await Context.Client.CurrentUser.ModifyAsync(x => x.Username = value).ConfigureAwait(false);
             await RespondAsync("Username updated :ok:");
@@ -32,7 +32,7 @@ namespace Calcifer.Modules.Bot
             {
                 throw new ArgumentException("Value cannot be empty");
             }
-                
+
             var client = Context.Client as DiscordSocketClient;
             await client.SetGameAsync(value).ConfigureAwait(false);
             await RespondAsync("Bot Game updated!");
@@ -68,7 +68,7 @@ namespace Calcifer.Modules.Bot
 
         readonly string[] allowedStatus = { "Offline", "Online", "Idle", "AFK", "Do Not Disturb", "Invisible" };
         // Can be either Offline, Online, Idle, AFK, DoNotDisturb or Invisible
-        [SlashCommand("status","Set the bots status. Can be Offline, Online, Idle, AFK, Do Not Disturb or Invisible")]
+        [SlashCommand("status", "Set the bots status. Can be Offline, Online, Idle, AFK, Do Not Disturb or Invisible")]
         public async Task Status(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -79,7 +79,7 @@ namespace Calcifer.Modules.Bot
             {
                 await RespondAsync("Input must be Offline, Online, Idle, AFK, Do Not Disturb or Invisible");
             }
-                
+
             var newStatus = Enum.Parse(typeof(UserStatus), value);
             await (Context.Client as DiscordSocketClient).SetStatusAsync((UserStatus)newStatus).ConfigureAwait(false);
             await RespondAsync($"Set status to: {value}").ConfigureAwait(false);

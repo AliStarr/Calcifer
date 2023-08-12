@@ -5,7 +5,8 @@
 	<TargetFramework>net7.0</TargetFramework>
 	<RootNamespace>Calcifer</RootNamespace>
 	<LangVersion>latest</LangVersion>
-    <Authors>Alister Haseldine</Authors>    
+    <Authors>Alister Haseldine</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,13 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
