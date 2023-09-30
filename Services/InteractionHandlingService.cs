@@ -27,13 +27,14 @@ namespace Calcifer.Services
             _config = config; // it's clearly used here
             _logger = logger;
 
-            _interactions.Log += msg => LogHelper.OnLogAsync(_logger, msg);            
+            _interactions.Log += msg => LogHelper.OnLogAsync(_logger, msg);          
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             _discord.Ready += () => _interactions.RegisterCommandsGloballyAsync(true);
             _discord.InteractionCreated += OnInteractionAsync;
+            
 
             await _interactions.AddModulesAsync(Assembly.GetEntryAssembly(), _services);
         }
