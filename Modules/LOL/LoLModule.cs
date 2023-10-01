@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Discord;
 using System;
 using GroupAttribute = Discord.Interactions.GroupAttribute;
+using System.Linq;
+using System.Diagnostics;
 
 namespace Calcifer.Modules
 {
@@ -31,8 +33,11 @@ namespace Calcifer.Modules
             var masteries = await riotApi.ChampionMasteryV4().GetAllChampionMasteriesAsync(PlatformRoute.OC1, summoner.Id);
             // Store results in key value pairs
             Dictionary<string, int> results = new();
-            var embed = new EmbedBuilder();
-            embed.Title = $"{playerName}'s Top 10 champions by mastery level";
+            var embed = new EmbedBuilder
+            {
+                Title = $"{playerName}'s Top 10 champions by mastery level"
+            };
+
             // Iterate over the top 10 returned by riot
             for (var i = 0; i < 10; i++)
             {
@@ -53,7 +58,7 @@ namespace Calcifer.Modules
         }
 
         [SlashCommand("last10matches", "Get the last 10 matches played by a player by queue. Default queue is Draft Pick.")]
-        public async Task LastTenMatches(string playerName, string queue = "Draft Pick")
+        public async Task LastTenMatches(string playerName/*, string queue = "Draft Pick" */) // We don't care about anything but Draft pick for now.
         {
             /* According to the riotAPI, you have to get matches with the players puuid which is riots internal id.
             * So we pull that from SummonerV4. THEN we have to call two seperate endpoints to get the matches (match/v5/by-puuid) and
@@ -66,11 +71,17 @@ namespace Calcifer.Modules
             string playerPuuid = summoner.Puuid;
             string[] matchesArr = await riotApi.MatchV5().GetMatchIdsByPUUIDAsync(RegionalRoute.SEA ,playerPuuid, 10, null, Queue.SUMMONERS_RIFT_5V5_DRAFT_PICK);
 
-            var embed = new EmbedBuilder();
+            var embed = new EmbedBuilder().WithThumbnailUrl($"http://ddragon.leagueoflegends.com/cdn/13.19.1/img/profileicon/{summoner.ProfileIconId}.png");
             embed.Title = $"{playerName}'s Last 10 matches";
 
-            await RespondAsync("The results will take a couple of seconds to fetch from Riot.");
-            
+            // Collecting data takes longer than 3 seconds which is the timeout for responding to an interaction so we'll cheat a little bit.
+            var timer = new Stopwatch();
+            timer.Start();
+            await RespondAsync("Collecting data...");
+            // Grab that ^ message id.
+            var msg = await Context.Channel.GetMessagesAsync(1).FlattenAsync();
+            var msgID = msg.First().Id;
+
             foreach (var match in matchesArr)
             {
                 var matchesInfo = await riotApi.MatchV5().GetMatchAsync(RegionalRoute.SEA, match);
@@ -105,13 +116,19 @@ namespace Calcifer.Modules
                         gamelength = participant.Challenges.GameLength;
                     }
                 }
-                var didWin = win ? "Win" : "Lost";
+                var didWin = win ? "Victory" : "Defeat";
 
-                embed.AddField($"{match}", $"Outcome: {didWin}\nKills: {kills}\nDeaths: {deaths}\nLane: {position}\nTotal Damage Delt: " +
-                    $"{totalDamageDelt}\nVision Score {visionScore}\nChampion Played {champPlayed}\nKDA {kda}\n" +
-                    $"GPM: {Math.Round((double)gpm)} per min\nGame Length: {Math.Round((decimal)(gamelength / 60))} Mins");
+                embed.AddField($"{match}", $":trophy: Outcome: {didWin}\n:knife: Kills: {kills}\n:skull: Deaths: {deaths}\n:radioactive: Lane: {position}\n:crossed_swords: Total Damage Delt: " +
+                    $"{totalDamageDelt}\n:eyes: Vision Score: {visionScore}\n:frame_photo: Champion Played: {champPlayed}\n:bar_chart: KDA: {Math.Round((double)kda)}\n" +
+                    $":coin: GPM: {Math.Round((double)gpm)} per min\n:timer: Game Length: {Math.Round((decimal)(gamelength / 60))} Mins", true);
             }
-            await ReplyAsync("", embed: embed.Build());
+            // Use the Id we grabbed earlier to modify the original message so we dont spam.
+            await Context.Channel.ModifyMessageAsync(msgID, x =>
+            {
+                x.Embed = embed.Build();
+                timer.Stop(); // Do some benchmarking.
+                x.Content = $"Response took {timer.Elapsed.TotalSeconds.ToString("0.00")} Seconds.";
+            });
         }
     }
 }
