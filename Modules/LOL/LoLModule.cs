@@ -5,11 +5,12 @@ using Camille.Enums;
 using Camille.RiotGames;
 using Microsoft.Extensions.Configuration;
 using Discord;
-using System.Diagnostics;
 using System;
+using GroupAttribute = Discord.Interactions.GroupAttribute;
 
 namespace Calcifer.Modules
 {
+    [Group("lol", "Commands related to Leauge of Legends")]
     public class LoLModule : InteractionModuleBase<SocketInteractionContext>
     {
         // Grabbing the API key
