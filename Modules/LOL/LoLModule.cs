@@ -1,14 +1,15 @@
-﻿using Discord.Interactions;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Camille.Enums;
+﻿using Camille.Enums;
 using Camille.RiotGames;
-using Microsoft.Extensions.Configuration;
 using Discord;
+using Discord.Interactions;
+using Microsoft.Extensions.Configuration;
 using System;
-using GroupAttribute = Discord.Interactions.GroupAttribute;
-using System.Linq;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using GroupAttribute = Discord.Interactions.GroupAttribute;
+
 
 namespace Calcifer.Modules
 {
