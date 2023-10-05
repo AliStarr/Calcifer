@@ -19,6 +19,7 @@ namespace Calcifer.Services
             _discord = discord;
             _config = config;
             _logger = logger;
+            
 
             _discord.Log += msg => LogHelper.OnLogAsync(_logger, msg);
         }
@@ -27,6 +28,7 @@ namespace Calcifer.Services
         {
             await _discord.LoginAsync(TokenType.Bot, _config["DiscordToken"]);
             await _discord.StartAsync();
+            
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
