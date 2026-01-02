@@ -6,8 +6,28 @@
 	<RootNamespace>Calcifer</RootNamespace>
 	<LangVersion>latest</LangVersion>
     <Authors>@AliStarr</Authors>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>    
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>enable</Nullable>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <PublishTrimmed>True</PublishTrimmed>
+    <Title>$(AssemblyName)</Title>
+    <AssemblyTitle>$(MSBuildProjectName)</AssemblyTitle>
+    <ApplicationIcon>Calcifer.ico</ApplicationIcon>
+    <PublishAot>True</PublishAot>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>    
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Calcifer.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Camille.RiotGames" Version="3.0.0-nightly-2023-09-23-9fe4521421" />
