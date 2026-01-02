@@ -2,19 +2,23 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
 	<TargetFramework>net10.0</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
 	<RootNamespace>Calcifer</RootNamespace>
 	<LangVersion>latest</LangVersion>
-    <Authors>@AliStarr</Authors>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
-    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
-    <PublishTrimmed>True</PublishTrimmed>
     <Title>$(AssemblyName)</Title>
     <AssemblyTitle>$(MSBuildProjectName)</AssemblyTitle>
-    <ApplicationIcon>Calcifer.ico</ApplicationIcon>
+    <Authors>@AliStarr</Authors>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <PublishTrimmed>True</PublishTrimmed>
+    <PublishRelease>true</PublishRelease>
     <PublishAot>True</PublishAot>
+    <PublishSelfContainted>true</PublishSelfContainted>
+    <UseAppHost>true</UseAppHost>
+    <ApplicationIcon>Calcifer.ico</ApplicationIcon>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest-recommended</AnalysisLevel>    
   </PropertyGroup>
