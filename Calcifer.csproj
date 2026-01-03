@@ -11,7 +11,6 @@
     <Title>$(AssemblyName)</Title>
     <AssemblyTitle>$(MSBuildProjectName)</AssemblyTitle>
     <Authors>@AliStarr</Authors>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <PublishTrimmed>True</PublishTrimmed>
     <PublishRelease>true</PublishRelease>
