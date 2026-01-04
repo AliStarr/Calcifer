@@ -428,3 +428,4 @@ FodyWeavers.xsd
 *.msp
 /Calcifer.png
 /.env
+/appsettings.json
